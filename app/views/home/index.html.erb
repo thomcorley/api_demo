@@ -1,0 +1,13 @@
+<div class="container-fluid">
+  <h1>Welcome to the FreeAgent API</h1>
+
+  <div class="contact-form">
+    <%= form_tag do %>
+      <%= text_field_tag(:first_name, nil, placeholder: "First Name") %>
+      <%= text_field_tag(:last_name, nil, placeholder: "Last Name") %>
+      <%= text_field_tag(:organisation_name, nil, placeholder: "Organsation Name") %>
+    <%= submit_tag("Create Contact") %>
+    <% end %>
+  </div>
+
+</div>
