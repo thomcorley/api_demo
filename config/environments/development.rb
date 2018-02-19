@@ -1,4 +1,12 @@
 Rails.application.configure do
+
+  config.oauth = {
+    client_id: "erJDURQ_fq7mCv_UBALcTQ",
+    secret: "EsTihFmdsxKUYDMMpMarng",
+    redirect_uri: "http://localhost:3000/oauth_tokens/access_token",
+    base_uri: "https://api.sandbox.freeagent.com/v2/approve_app?",
+    base_token_uri: "api.sandbox.freeagent.com/v2/token_endpoint"
+  }
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
