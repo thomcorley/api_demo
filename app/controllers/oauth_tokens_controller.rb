@@ -10,14 +10,21 @@ class OauthTokensController < ApplicationController
       headers: headers,
       body: {grant_type: "authorization_code", code: code, redirect_uri: con(:redirect_uri)}
     )
+
     puts response
-    # puts JSON.parse(response.to_s)[:access_token]
-    create_contact(access_token)
+    puts access_token = JSON.parse(response.to_s)["access_token"]
+
+    puts create_contact(access_token)
+    render plain: "Contact Created!"
   end
 
   def create_contact(access_token)
-    HTTParty.post("https://api.sandbox.freeagent.com",
-      headers: { "Authorization" => "Bearer #{@access_token}" },
+    puts "hello"
+    HTTParty.post("https://api.sandbox.freeagent.com/v2/contacts",
+      headers: {
+        "Authorization" => "Bearer #{access_token}",
+        "User-Agent" => "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.81 Safari/537.36"
+      },
       body: { contact: { organisation_name: "Acme Computers" } }
     )
   end
