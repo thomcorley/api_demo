@@ -1,14 +1,15 @@
 class IndexController < ApplicationController
 	require "httparty"
+  HTTParty::Basement.default_options.update(verify: false)
+  protect_from_forgery with: :null_session
 
 	CONFIG = {
   	client_id: "erJDURQ_fq7mCv_UBALcTQ",
     client_secret: "EsTihFmdsxKUYDMMpMarng",
-    redirect_uri_2: "http://localhost:3000/index/callback",
-    auth_endpoint: "https://api.sandbox.freeagent.com/v2/approve_app?",
-    token_endpoint: "api.sandbox.freeagent.com/v2/token_endpoint"
+    redirect_uri: "http://localhost:5000/index/callback",
+    auth_endpoint: "https://api.int4.fre.ag/v2/approve_app?",
+    token_endpoint: "api.int4.fre.ag/v2/token_endpoint"
   }
-
 
   def authorize
   	@url = CONFIG[:auth_endpoint] + authorization_params
@@ -24,18 +25,21 @@ class IndexController < ApplicationController
       body: {
         "grant_type" => "authorization_code",
         "code" => auth_code,
-        "redirect_uri" => CONFIG[:redirect_uri_2]
-      })
+        "redirect_uri" => CONFIG[:redirect_uri]
+    })
 
-      access_token = token_response["access_token"]
+    access_token = token_response["access_token"]
+    puts access_token
+  end
 
-      bank_accounts = HTTParty.get("https://api.sandbox.freeagent.com/v2/bank_accounts/id",
-        headers: {
-          "Authorization" => "Bearer #{access_token}",
-          "User-Agent" => "FreeAgent Api Demo"
-        })
-
-      puts bank_accounts
+  def webhook
+    print params
+    # Struct.new(
+    #   event:  params[:amount],
+    #   bank_account_id: params[:bank_account_id],
+    #   description: params[:description],
+    #   amount: params[:amount],
+    # )
   end
 
   private
@@ -44,7 +48,7 @@ class IndexController < ApplicationController
     params = {
       client_id: CONFIG[:client_id],
       response_type: "code",
-      redirect_uri: CONFIG[:redirect_uri_2]
+      redirect_uri: CONFIG[:redirect_uri]
     }
 
     URI.encode_www_form(params)

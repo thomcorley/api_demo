@@ -1,0 +1,33 @@
+<?OFX OFXHEADER="200" VERSION="220" SECURITY="NONE" OLDFILEUID="NONE" NEWFILEUID="NONE" ?><OFX>
+    <SIGNONMSGSRSV1>
+        <SONRS>
+            <STATUS>
+                <CODE>0</CODE>
+                <SEVERITY>INFO</SEVERITY>
+            </STATUS>
+            <DTSERVER>1509736314776</DTSERVER>
+            <LANGUAGE>ENG</LANGUAGE>
+        </SONRS>
+    </SIGNONMSGSRSV1>
+    <BANKMSGSRSV1>
+        <STMTTRNRS>
+            <STATUS>
+                <CODE>0</CODE>
+                <SEVERITY>INFO</SEVERITY>
+            </STATUS>
+            <STMTRS>
+                <CURDEF>GBP</CURDEF>
+                <BANKTRANLIST>
+                    <STMTTRN>
+                        <TRNTYPE>PAYMENT</TRNTYPE>
+                        <NAME>TESTTESTTESTTESTTEST</NAME>
+                        <MEMO>TEST</MEMO>
+                        <DTPOSTED>05/12/2019</DTPOSTED>
+                        <TRNAMT>15000000</TRNAMT>
+                        <FITID>MCOKBEYT1</FITID>
+                    </STMTTRN>
+                </BANKTRANLIST>
+            </STMTRS>
+        </STMTTRNRS>
+    </BANKMSGSRSV1>
+</OFX>
